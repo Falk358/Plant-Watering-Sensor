@@ -1,2 +1,6 @@
 [default.general]
 chip = "MSP432P401R"
+
+[default.rtt]
+enabled = true
+
