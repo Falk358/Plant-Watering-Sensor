@@ -11,11 +11,12 @@ Check the [Feature List](feature_list.md) for features which are being worked on
 
 # Setup Instructions
 
-ARM Cortex M4F application built using the rust-embedded [template](https://github.com/rust-embedded/cortex-m-quickstart)
+ARM Cortex M4F application built using the rust-embedded [template](https://github.com/rust-embedded/cortex-m-quickstart).
+This [video](https://www.youtube.com/watch?v=TOAynddiu5M&ab_channel=TheRustyBits) might contain some useful information for setting up your development environment.
 
 ## Target
 
-This program is targeted at MSP432P401R Launchpad development board
+This program is targeted at MSP432P401R Launchpad development board.
 
 ## Getting Started
 
