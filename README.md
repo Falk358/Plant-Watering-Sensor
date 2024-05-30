@@ -1,4 +1,15 @@
-# arm-hello-world-rust
+# Plant Watering Sensor
+
+This project is a fork of [arm-hello-world-rust](https://github.com/caiotavares/arm-hello-world-rust).
+Use the **Setup instructions** below taken from [arm-hello-world-rust](https://github.com/caiotavares/arm-hello-world-rust) to initialize this project.
+
+This repository aims to read a [Soil Moisture Sensor Hygrometer Module](https://www.amazon.de/-/en/Aideepen-Hygrometer-Capacitive-Corrosion-Resistant/dp/B08GCRZVSR/ref=sr_1_1?crid=2W7XF8F4JKXZQ&dib=eyJ2IjoiMSJ9.Ny3kivPWKCRgx8Sjtrz7Fw.ohgDE1o5dPTlRXRLrAiAA_s1_pvnoX7SqPY2ZAuswf0&dib_tag=se&keywords=Aideepen+6+Pieces+Soil+Moisture+Sensor+Hygrometer+Module+V1.2+Capacitive+Corrosion+Resistant+Module+for+Plant+Watering+DIY&qid=1717084973&s=industrial&sprefix=aideepen+6+pieces+soil+moisture+sensor+hygrometer+module+v1.2+capacitive+corrosion+resistant+module+for+plant+watering+diy+%2Cindustrial%2C101&sr=1-1) to detect whether your plants need to be watered.
+
+Check the [Feature List](feature_list.md) for features which are being worked on or to add your own requests.
+
+
+
+# Setup Instructions
 
 ARM Cortex M4F application built using the rust-embedded [template](https://github.com/rust-embedded/cortex-m-quickstart)
 
