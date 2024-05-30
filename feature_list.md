@@ -5,7 +5,10 @@ We dont know the circumstances the sensor will be deployed to, therefore Calibra
 
 + [x] Measure max_value of sensor in earth (dry)
 + [x] Measure min_value of sensor in earth (wet)
-+ [ ] store values in persistent memory; load them for the main application on startup
++ [ ] store values in persistent memory (EEPROM); load them for the main application on startup.
+      + does our controller have EEPROM?
+      + how much memory is available? can it store two u16?
+      
 
 ## Think about UX-Library
 
