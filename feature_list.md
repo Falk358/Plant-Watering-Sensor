@@ -20,7 +20,7 @@ We dont know the circumstances the sensor will be deployed to, therefore Calibra
 ## State Machine
 A state machine should help structure the program and improve debugability. 
 
-possible crate: [rust fsm](https://docs.rs/rust-fsm/latest/rust_fsm/)
+used crate: [sfsm](https://docs.rs/sfsm/0.4.3/sfsm/)
 
 
 
