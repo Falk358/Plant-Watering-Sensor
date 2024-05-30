@@ -7,7 +7,7 @@ use rtt_target::{rprintln, rtt_init_print};
 use sfsm::*;
 use lib::peripheral_access::{init_peripherals, with_peripherals};
 use lib::state_machine_logic::{Calibration, MainStateMachine};
-use lib::utils::{set_p1_4_pull_up, stop_watchdog_timer};
+use lib::utils::{enable_p1_4_pull_up_resistor, disable_watchdog_timer, configure_rgb_pins_as_output};
 
 
 #[entry]
@@ -18,8 +18,9 @@ fn main() -> ! {
     init_peripherals();
 
     with_peripherals(|peripherals| {
-        stop_watchdog_timer(peripherals);
-        set_p1_4_pull_up(peripherals);
+        disable_watchdog_timer(peripherals);
+        enable_p1_4_pull_up_resistor(peripherals);
+        configure_rgb_pins_as_output(peripherals);
     });
 
     let mut main_state_machine = MainStateMachine::new();

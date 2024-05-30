@@ -1,7 +1,7 @@
 use rtt_target::rprintln;
-use sfsm::{add_state_machine, State, TransitGuard, Transition};
+use sfsm::{add_state_machine, State, TransitGuard, Transition, IsState, StateMachine, SfsmError};
 use crate::peripheral_access::with_peripherals;
-use crate::utils::{read_p1_4, set_led_color, set_rgb_output_dir};
+use crate::utils::{is_p1_4_high, set_rgb_led_state};
 
 pub struct Calibration {}
 
@@ -26,28 +26,38 @@ add_state_machine!(
 impl State for Calibration {
     fn entry(&mut self) {
         rprintln!("Calibration: Entry");
-        // Example of using the peripherals in the main loop
-        with_peripherals(|peripherals| {
-            // Call your library function here, passing the mutable peripherals
-            set_rgb_output_dir(&peripherals);
-        });
     }
     fn execute(&mut self) {
         rprintln!("Calibration: Execute");
-        with_peripherals(|peripherals| {
-            // Call your library function here, passing the mutable peripherals
-            set_led_color(&peripherals, false, true, false);
-        });
+        self.set_board_led_to_green();
     }
     fn exit(&mut self) {
         rprintln!("Calibration: Exit");
     }
 }
 
+impl Calibration {
+    fn set_board_led_to_green(&self) {
+        with_peripherals(|peripherals| {
+            set_rgb_led_state(&peripherals, false, true, false);
+        });
+    }
+
+    fn is_board_button_pressed(&self) -> bool {
+        let mut is_pressed = false;
+        with_peripherals(|peripherals| {
+            if is_p1_4_high(&peripherals) {
+                is_pressed = true;
+            }
+        });
+        is_pressed
+    }
+}
+
 // Then implement the transitions.
 // Each transition can define an action that gets executed during the transition to the next state.
-// Additionally a Into implementation has to be provided so that each state can be transformed
-// Into the next one.
+// Additionally, an Into implementation has to be provided so that each state can be transformed Into
+// the next one.
 impl Into<Measure> for Calibration {
     fn into(self) -> Measure {
         Measure {}
@@ -59,30 +69,31 @@ impl Transition<Measure> for Calibration {
         rprintln!("Calibration => Measure: Exit");
     }
     fn guard(&self) -> TransitGuard {
-        let mut transit_guard = TransitGuard::Remain;
-        with_peripherals(|peripherals| {
-            if read_p1_4(&peripherals) {
-                transit_guard = TransitGuard::Transit
-            }
-        });
-        return transit_guard;
+        if self.is_board_button_pressed() {
+            TransitGuard::Transit
+        } else {
+            TransitGuard::Remain
+        }
     }
 }
 
 impl State for Measure {
     fn entry(&mut self) {
         rprintln!("Measure: Entry");
-        with_peripherals(|peripherals| {
-            set_rgb_output_dir(&peripherals);
-        });
     }
     fn execute(&mut self) {
         rprintln!("Measure: Execute");
-        with_peripherals(|peripherals| {
-            set_led_color(&peripherals, false, false, true);
-        });
+        self.set_board_led_to_blue();
     }
     fn exit(&mut self) {
         rprintln!("Measure: Exit");
+    }
+}
+
+impl Measure {
+    fn set_board_led_to_blue(&self) {
+        with_peripherals(|peripherals| {
+            set_rgb_led_state(&peripherals, false, false, true);
+        });
     }
 }
