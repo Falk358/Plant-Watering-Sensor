@@ -13,6 +13,8 @@ msp432p401r-pac = "0.3.0"
 cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
 rtt-target = "0.5.0"
 sfsm = "0.4.3"
+rtic = { version = "2.1.1", features = ["thumbv7-backend"] }
+
 
 [lib]
 name = "lib"
