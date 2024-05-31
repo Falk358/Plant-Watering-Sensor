@@ -2,17 +2,25 @@
 authors = ["Caio Tavares <caio.tavares11@gmail.com>"]
 edition = "2018"
 readme = "README.md"
-name = "arm-hello-world-rust"
+name = "msp432_rtic"
 version = "0.1.0"
 
 [dependencies]
-cortex-m-rt = "0.7.3"
-cortex-m-semihosting = "0.5.0"
+
 panic-halt = "0.2.0"
-msp432p401r-pac = "0.3.0"
-cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
-rtt-target = "0.5.0"
-sfsm = "0.4.3"
+
+
+
+#rtic = { version = "2.1.1", features = ["thumbv7-backend"] }
+#rtt-target = "0.5.0"
+#sfsm = "0.4.3"
+
+cortex-m = { version = "0.6.7", features = ["const-fn"] }
+msp432p401r-hal = "0.2.0"
+
+
+
+
 
 [lib]
 name = "lib"
@@ -20,7 +28,7 @@ path = "src/lib.rs"
 
 # this lets you use `cargo fix`!
 [[bin]]
-name = "arm-hello-world-rust"
+name = "msp432_rtic"
 test = false
 bench = false
 
